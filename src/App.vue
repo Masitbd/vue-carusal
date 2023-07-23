@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 
 const images = ref([
   'https://images.unsplash.com/photo-1682685797769-481b48222adf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE2fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=1024&q=60',
@@ -19,6 +19,12 @@ const nextImage = () => {
 const prevImage = () => {
   currentIndex.value = (currentIndex.value - 1 + images.value.length) % images.value.length;
 };
+
+
+onMounted(() => {
+  setInterval(nextImage, 3000);
+});
+
 </script>
 <template>
   <div class="app">
@@ -27,8 +33,8 @@ const prevImage = () => {
         <img :src="currentImage" alt="Carousel Image" class="w-full h-full object-cover">
       </div>
       <div class="controls mt-3 flex">
-        <button @click="prevImage" :disabled="currentIndex === 0" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-l mr-3">Previous</button>
-        <button @click="nextImage" :disabled="currentIndex === images.length - 1" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r">Next</button>
+        <button  @click="prevImage" :disabled="currentIndex === 0" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-l mr-3">Previous</button>
+        <button  @click="nextImage" :disabled="currentIndex === images.length - 1" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r">Next</button>
       </div>
     </div>
   </div>
