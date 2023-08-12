@@ -1,5 +1,6 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
+let intervalId
 
 const images = ref([
   'https://images.unsplash.com/photo-1682685797769-481b48222adf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE2fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=1024&q=60',
@@ -22,9 +23,15 @@ const prevImage = () => {
 
 
 onMounted(() => {
-  setInterval(nextImage, 3000);
-});
+  console.log('the component is unmounted')
+ 
+  intervalId = setInterval(nextImage, 3000);
+})
 
+onBeforeUnmount(() => {
+  console.log('This is cleat interval information')
+ clearInterval(intervalId)
+})
 </script>
 <template>
   <div class="app">
