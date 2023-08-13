@@ -23,14 +23,11 @@ const prevImage = () => {
 
 
 onMounted(() => {
-  console.log('the component is unmounted')
- 
   intervalId = setInterval(nextImage, 3000);
 })
 
 onBeforeUnmount(() => {
-  console.log('This is cleat interval information')
- clearInterval(intervalId)
+  clearInterval(intervalId)
 })
 </script>
 <template>
